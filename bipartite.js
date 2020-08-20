@@ -18,7 +18,37 @@ var isBipartite = function(graph) {
     return true;
 };
 
-let graph= [[1,2,3], [0,2], [0,1,3], [0,2]];
+var isBipartite_bfs = function(graph) {
+    let n=graph.length;
+    let color=new Array(n).fill(0);
+    let queue=[];
+    for(let j=0;j<n;j++){
+        if(color[j]==0){
+            queue.push(j);
+            color[j]=1;
+            while(queue.length>0){
+                let k=queue.pop();
+                let items=graph[k];
+                for(let i=0;i<items.length;i++){
+                    let m=items[i];
+                    if(color[m]==color[k]){
+                        return false;
+                    }
+                    if(color[m]!=0){
+                        continue;
+                    }
+                    color[m]=-color[k];
+                    queue.push(m);
+                }
+            }
+        }
+    }
+    return true;
+};
+
+let graph= [[1,3], [0,2],[1],[0]];
 let result=isBipartite(graph);
+console.log(result);
+result=isBipartite_bfs(graph);
 console.log(result);
 
