@@ -1,4 +1,3 @@
-
 var eightQueen=function(n){
     let result=[];
     var backtrack=function(m,positions){
@@ -32,4 +31,3 @@ var eightQueen=function(n){
     backtrack(0,positions);
     return result;
 };
-

@@ -94,3 +94,5 @@ let numCourses=4;
 let prerequisites=[[1,0],[0,2],[2,3]];
 let result=check(numCourses,prerequisites);
 console.log(result);
+
+

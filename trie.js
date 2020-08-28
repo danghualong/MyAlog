@@ -1,82 +1,59 @@
-// 判断能构成回文串的组合
-var palindromePairs = function(words) {
-    var isPalindrome=(word,start,end)=>{
-        let len=(end-start+1);
-        let l=0;
-        let r=0;
-        if(len%2==0){
-            l=start+len/2-1;
-            r=start+len/2;
-        }else{
-            l=start+(len-1)/2-1;
-            r=start+(len+1)/2;
+var Node=function(){
+    this.isWord=false;
+    this.children=new Map();
+};
+var Trie=function(){
+    this.root=new Node();
+};
+Trie.prototype={
+    add:function(word){
+        let cur=this.root;
+        for(let i=0;i<word.length;i++){
+            if(!cur.children.has(word[i])){
+                cur.children.set(word[i],new Node());
+            }
+            cur=cur.children.get(word[i]);
         }
-        while(l>=start){
-            if(word[l]!=word[r]){
+        cur.isWord=true;
+    },
+    contains:function(word){
+        let cur=this.root;
+        for(let i=0;i<word.length;i++){
+            if(!cur.children.has(word[i])){
                 return false;
             }
-            l--;
-            r++;
+            cur=cur.children.get(word[i]);
         }
-        return true;
-    };
-    var samePrefix=(longWord,shortWord,longfirst)=>{
-        let len=shortWord.length;
-        let equalPrefix=true;
-        if(longfirst){
-            for(let k=0;k<len;k++){
-                if(longWord[len-k-1]!=shortWord[k])
-                {
-                    equalPrefix=false;
-                    break;
-                }
+        return cur.isWord;
+    },
+    delete:function(word){
+        let cur=this.root;
+        let startIndex=-1;
+        let lastNode=null;
+        for(let i=0;i<word.length;i++){
+            //前一个isWord=true的节点
+            if(cur.isWord){
+                startIndex=i;
+                lastNode=cur;
             }
-            if(equalPrefix){
-                if(isPalindrome(longWord,len,longWord.length-1)){
-                    return true;
-                }
-            }
+            cur=cur.children.get(word[i]);
+        }
+        //后续没有字符
+        if(lastNode!=null){
+            lastNode.children.delete(word[startIndex]);
         }else{
-            let len2=longWord.length;
-            for(let k=0;k<len;k++){
-                if(longWord[len2-1-k]!=shortWord[k])
-                {
-                    equalPrefix=false;
-                    break;
-                }
-            }
-            if(equalPrefix){
-                if(isPalindrome(longWord,0,len2-len-1)){
-                    return true;
-                }
-            }
-        }
-        return false;
-    };
-    let n=words.length;
-    let longIndex=-1;
-    let shortIndex=-1;
-    let result=[];
-    for(let i=0;i<n-1;i++){
-        for(let j=i+1;j<n;j++){
-            if(words[j].length>words[i].length){
-                longIndex=j;
-                shortIndex=i;
-            }else{
-                longIndex=i;
-                shortIndex=j;
-            }
-            if(samePrefix(words[longIndex],words[shortIndex],true)){
-                result.push([longIndex,shortIndex]);
-            }
-            if(samePrefix(words[longIndex],words[shortIndex],false)){
-                result.push([shortIndex,longIndex]);
-            }
+            //后续还有字符
+            cur.isWord=false;
         }
     }
-    return result;
 };
 
-let words=["bat","tab","cat"];//["abcd","dcba","lls","s","sssll"];
-let result=palindromePairs(words);
-console.log(result);
+let trie=new Trie();
+trie.add("paint");
+console.log(trie.contains("pain"));
+trie.add("pain");
+console.log(trie.contains("pain"));
+trie.delete("paint");
+console.log(trie.contains("paint"));
+console.log(trie.contains("pain"));
+

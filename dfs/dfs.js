@@ -1,6 +1,6 @@
 
-const treeUtil=require("./tree");
-const model = require("./model");
+const treeUtil=require("../tree");
+const model = require("../model");
 // 打家劫舍(从二叉树结构中选择)
 var rob=function(root){
     var dfs=(node)=>{
