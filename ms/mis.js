@@ -1,5 +1,5 @@
 //monotonous increasing stack
-var lowers=function(heights){
+var maxArea=function(heights){
     heights.unshift(0);
     let stack=[0];
     let max=0;
@@ -35,7 +35,7 @@ var lowers=function(heights){
 };  
 
 let heights=[3,4,1,4,3,5];
-let result=lowers(heights);
+let result=maxArea(heights);
 console.log(result);
 
 

@@ -17,7 +17,7 @@ var isBipartite = function(graph) {
     }
     return true;
 };
-
+//染色法判断是否二分图
 var isBipartite_bfs = function(graph) {
     let n=graph.length;
     let color=new Array(n).fill(0);
