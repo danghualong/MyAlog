@@ -2,6 +2,7 @@ var Node=function(){
     this.isWord=false;
     this.children=new Map();
 };
+//字典树
 var Trie=function(){
     this.root=new Node();
 };
