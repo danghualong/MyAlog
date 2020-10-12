@@ -17,6 +17,7 @@ var isBalanceTree=function(root){
     isBalanceTree(root.right);
 }
 
+const { TreeNode } = require("../model");
 var model=require("../model");
 var treeUtil=require("../treeUtil");
 
@@ -35,3 +36,29 @@ nums=[3,9,20,null,null,15,7];
 root=treeUtil.deserialize(nums);
 console.log(calHeight(root));
 console.log(isBalanceTree(root));
+
+var insertIntoBST = function(root, val) {
+    var dfs=(node,val)=>{
+        if(val>node.val){
+            if(node.right==null){
+                node.right=new TreeNode(val);
+                return;
+            }else{
+                dfs(node.right,val);
+            }
+        }else{
+            if(node.left==null){
+                node.left=new TreeNode(val);
+                return;
+            }else{
+                dfs(node.left,val);
+            }
+        }
+    };
+    if(root==null){
+        root=new TreeNode(val);
+        return root;
+    }
+    dfs(root,val);
+    return root;
+};
