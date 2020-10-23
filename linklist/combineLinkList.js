@@ -1,4 +1,4 @@
-let model=require("./model");
+let model=require("../model");
 /**
  * @param {ListNode[]} lists
  * @return {ListNode}

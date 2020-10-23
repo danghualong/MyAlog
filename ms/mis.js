@@ -1,4 +1,4 @@
-
+//括号是否正确匹配
 var isValid = function(s) {
     if(!s || s.length==0){
         return true;

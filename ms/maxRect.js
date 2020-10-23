@@ -39,5 +39,34 @@ var maxArea=function(heights){
 };  
 
 let heights=[3,4,1,4,3,5];
-let result=maxArea(heights);
-console.log(result);
+let result1=maxArea(heights);
+console.log("当前矩形围成的最大面积为:",result1);
+
+//最大由1围成的矩形面积
+var maxRect=function(matrix){
+    let result=0;
+    let heights=new Array(matrix[0].length).fill(0);
+    for(let i=0;i<matrix.length;i++){
+        for(let j=0;j<matrix[i].length;j++){
+            if(matrix[i][j]!=0){
+                heights[j]+=1;
+            }else{
+                heights[j]=0;
+            }
+        }
+        let tmpMaxArea=maxArea(heights);
+        if(tmpMaxArea>result){
+            result=tmpMaxArea;
+        }
+    } 
+    return result;
+}
+
+let matrix=[
+    ["1","0","1","0","0"],
+    ["1","0","1","1","1"],
+    ["1","1","1","1","1"],
+    ["1","0","0","1","0"]
+  ];
+let result2=maxRect(matrix);
+console.log("由1围成的最大面积为:",result2);

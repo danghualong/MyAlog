@@ -1,3 +1,4 @@
+//接雨水问题
 var rainWater=function(nums){
     let stack=[];
     let maxHeight=0;
