@@ -1,33 +1,33 @@
-var eightQueen=function(n){
+//8皇后 所有解法
+var eightQueen = function(n) {
     let result=[];
-    var backtrack=function(m,positions){
-        if(m>=n){
-            result.push(positions.slice(0));
-            return;
-        }
-        for(let i=0;i<n;i++){
-            if(isFit(positions,n,m,i)){
-                positions.push(i);
-                backtrack(m+1,positions);
-                positions.pop();
-            }
-        }
-    };
-    var isFit=function(positions,n,m,j){
-        for(let i=0;i<m;i++){
-            if(j==positions[i]){
+    var isValid=function(r,c,path){
+        for(let i=0;i<path.length;i++){
+            if(path[i]==c){
                 return false;
             }
-            if(j-(m-i)>=0 && positions[i]==j-(m-i)){
-                return false;
-            }
-            if(j+(m-i)<n && positions[i]==j+(m-i)){
+            if(Math.abs(path[i]-c)==Math.abs(i-r)){
                 return false;
             }
         }
         return true;
-    };
-    let positions=[];
-    backtrack(0,positions);
+    }
+    var backtrack=function(r,path){
+        if(r>=n){
+            result.push(path.slice());
+            return;
+        }
+        for(let i=0;i<n;i++){
+            if(isValid(r,i,path)){
+                path.push(i);
+                backtrack(r+1,path);
+                path.pop();
+            }
+        }
+    }
+    backtrack(0,[]);
     return result;
 };
+
+let result=eightQueen(4);
+console.log(result);
