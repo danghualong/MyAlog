@@ -1,11 +1,10 @@
-var predictPartyVictory = function(senate) {
+var predictPartyVictory = function (senate) {
     let map = new Map();
     map.set("R", 0);
     map.set("D", 0);
     let rivals = new Map();
     rivals.set("R", "D");
     rivals.set("D", "R");
-
     while (true) {
         let newSenate = '';
         for ( let i = 0; i < senate.length; i++){
