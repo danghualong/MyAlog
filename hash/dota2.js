@@ -1,32 +1,36 @@
-var predictPartyVictory = function(senate) {
-    const xx = new Map();
-    xx.set("R","D");
-    xx.set("D","R");
-    let map=new Map();
+var predictPartyVictory = function (senate) {
+    let map = new Map();
+    map.set("R", 0);
+    map.set("D", 0);
+    let rivals = new Map();
+    rivals.set("R", "D");
+    rivals.set("D", "R");
     while (true) {
-        map.set("R",0);
-        map.set("D",0);
-        for (let i = 0; i < senate.length; i++) {
-            map.set(senate[i],map.get(senate[i])+1);
-        }
         let newSenate = '';
-        for (let i = 0; i < senate.length; i++) {
-            console.log(map);
-            if(map.get(senate[i])>0){
-                let len = map.get(xx.get(senate[i]));
-                if(len>0){
-                    map.set(xx.get(senate[i]),len-1);
-                    newSenate += senate[i];
-                } else {
-                    return senate[i];
-                }
+        for ( let i = 0; i < senate.length; i++){
+            const a = senate[i];
+            if (map.get(a) > 0) {
+                map.set(a, map.get(a) - 1);
+            }
+            else {
+                const rival = rivals.get(a);
+                map.set(rival, map.get(rival) + 1);
+                newSenate += a;
             }
         }
-        console.log(newSenate);
         senate = newSenate;
+        const DLen = newSenate.replace(/R/g, '').length;
+        const RLen = senate.length - DLen;
+        console.log(senate, map, DLen, RLen);
+        if (map.get("D") >= DLen) {
+            return "R";
+        }
+        else if (map.get("R") >= RLen) {
+            return "D";
+        }
     }
+
 };
 
-let senate="RDRRDDD";
-let result = predictPartyVictory(senate);
-console.log(result);
+let senate="RDDDR";
+console.log(predictPartyVictory(senate));

@@ -1,39 +1,33 @@
-var eightQueen=function(n){
+//8皇后 所有解法
+var eightQueen = function(n) {
     let result=[];
-    let backtrack=function(row,positions){
-        if(row>=n){
-            result.push([...positions]);
-            return;
-        }
-        for(let col=0;col<n;col++){
-            if (isValid(positions, n, row, col)) {
-                // 递归前做选择
-                positions.push(col);
-                backtrack(row + 1, positions);
-                // 递归后撤销选择
-                positions.pop();
-            }
-        }
-    };
-    let isValid=function(positions,n,row,col){
-        for(let i=0;i<row;i++){
-            if(col==positions[i]){
+    var isValid=function(r,c,path){
+        for(let i=0;i<path.length;i++){
+            if(path[i]==c){
                 return false;
             }
-            if(col-(row-i)>=0 && positions[i]==col-(row-i)){
-                return false;
-            }
-            if(col+(row-i)<n && positions[i]==col+(row-i)){
+            if(Math.abs(path[i]-c)==Math.abs(i-r)){
                 return false;
             }
         }
         return true;
-    };
-    let positions=[];
-    backtrack(0,positions);
+    }
+    var backtrack=function(r,path){
+        if(r>=n){
+            result.push(path.slice());
+            return;
+        }
+        for(let i=0;i<n;i++){
+            if(isValid(r,i,path)){
+                path.push(i);
+                backtrack(r+1,path);
+                path.pop();
+            }
+        }
+    }
+    backtrack(0,[]);
     return result;
 };
 
-const result = eightQueen(8);
+let result=eightQueen(4);
 console.log(result);
-console.log("total count:",result.length);
