@@ -1,27 +1,29 @@
 var eightQueen=function(n){
     let result=[];
-    var backtrack=function(m,positions){
-        if(m>=n){
-            result.push(positions.slice(0));
+    let backtrack=function(row,positions){
+        if(row>=n){
+            result.push([...positions]);
             return;
         }
-        for(let i=0;i<n;i++){
-            if(isFit(positions,n,m,i)){
-                positions.push(i);
-                backtrack(m+1,positions);
+        for(let col=0;col<n;col++){
+            if (isValid(positions, n, row, col)) {
+                // 递归前做选择
+                positions.push(col);
+                backtrack(row + 1, positions);
+                // 递归后撤销选择
                 positions.pop();
             }
         }
     };
-    var isFit=function(positions,n,m,j){
-        for(let i=0;i<m;i++){
-            if(j==positions[i]){
+    let isValid=function(positions,n,row,col){
+        for(let i=0;i<row;i++){
+            if(col==positions[i]){
                 return false;
             }
-            if(j-(m-i)>=0 && positions[i]==j-(m-i)){
+            if(col-(row-i)>=0 && positions[i]==col-(row-i)){
                 return false;
             }
-            if(j+(m-i)<n && positions[i]==j+(m-i)){
+            if(col+(row-i)<n && positions[i]==col+(row-i)){
                 return false;
             }
         }
@@ -31,3 +33,7 @@ var eightQueen=function(n){
     backtrack(0,positions);
     return result;
 };
+
+const result = eightQueen(8);
+console.log(result);
+console.log("total count:",result.length);
