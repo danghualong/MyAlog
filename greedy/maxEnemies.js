@@ -1,4 +1,7 @@
-// 在游戏结束前能消灭的最大敌人数
+// 我方每次只能射杀一个敌人，当其中有敌人到达目的地（游戏结束)时，
+// 能消灭的敌人最大数
+// dists 敌人离目标的距离
+// steps 每个敌人的移动步数
 function getMaxScore(dists,steps){
     let findNearestDist=()=>{
         console.log(dists);
