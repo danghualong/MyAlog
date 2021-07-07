@@ -1,8 +1,8 @@
-const {initArray}=require("./util");
+var arrUtil = require("../arrUtil");
 // 戳气球
 var maxCoins = function(nums) {
     let n=nums.length;
-    let dp=initArray(n+2,n+2,0);
+    let dp=arrUtil.matrix(n+2,n+2,0);
     nums.unshift(1);
     nums.push(1);
     for(let j=2;j<=n+1;j++){

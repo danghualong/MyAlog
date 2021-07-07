@@ -1,4 +1,4 @@
-let util=require("../util");
+let util=require("../treeUtil");
 
 var crossOver=function(nums){
     if(nums.length==1){
