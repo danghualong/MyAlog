@@ -1,4 +1,5 @@
 const {TreeNode}=require("../model");
+let treeUtil=require("../treeUtil");
 //根据中序和后序遍历结果，重塑二叉树
 //如果只有前序和后序遍历，则无法确定二叉树的结构
 var buildTree = function(inorder, postorder) {
@@ -24,7 +25,6 @@ var buildTree = function(inorder, postorder) {
 
 let inorder=[];
 let postorder=[];
-let treeUtil=require("../treeUtil");
 let root=buildTree(inorder,postorder);
 console.log(treeUtil.serialize(root));
 

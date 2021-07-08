@@ -1,5 +1,7 @@
 var model = require("../model");
 var util = require("../treeUtil");
+
+// 是否是镜像对称二叉树
 function isSymmetric(arr) {
     let root = util.deserialize(arr);
     if (root == null) {
