@@ -62,6 +62,6 @@ function sort(items, reverse) {
     }
 }
 
-const items = [4, 7, 3, 10, 5, 2, 1, 9, 9];
-sort(items, true);
-console.log(items);
+module.exports = {
+    sort,
+}
