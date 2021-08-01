@@ -50,18 +50,32 @@ function heapify(items, k, reverse) {
 // reverse是否倒序排列
 function sort(items, reverse) {
     let k = items.length;
+    sortK(items, k, reverse);
+}
+// 取最后K个最大值
+function sortK(items, k, reverse) {
+    const n = items.length;
     // 构建堆
-    heapify(items, k, reverse);
-    while (k > 0) {
+    heapify(items, n, reverse);
+    if (k > n || k <= 0) {
+        k = n;
+    }
+    let i = 0;
+    while (i < k) {
         // 交换最大值和第k个值，
         // 保证最大值在最后面
-        swap(items, 0, k - 1);
+        swap(items, 0, n - i - 1);
         // 下沉第1个节点
-        sink(items, 0, k - 1, reverse);
-        k--;
+        sink(items, 0, n - i - 1, reverse);
+        i++;
     }
 }
 
 module.exports = {
     sort,
+    sortK,
 }
+
+
+
+
