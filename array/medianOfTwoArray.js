@@ -1,9 +1,6 @@
 
-
+//二分法获取两个有序数组的中位数
 function findMedian(arr1, arr2) {
-    let t = arr1.length + arr2.length;
-    let k = parseInt((t - 1) / 2);
-
     var findMedian2 = (arr1, left1, right1, arr2, left2, right2, k) => {
         // console.log(left1, right1, left2, right2, k);
         // arr1子数组为空
@@ -29,6 +26,8 @@ function findMedian(arr1, arr2) {
             return findMedian2(arr1, left1, right1, arr2, mid2 + 1, right2, k - 1 - (mid2 - left2));
         }
     };
+    let t = arr1.length + arr2.length;
+    let k = parseInt((t - 1) / 2);
     if (t % 2 == 1) {
         return findMedian2(arr1, 0, arr1.length - 1, arr2, 0, arr2.length - 1, k);
     } else {
